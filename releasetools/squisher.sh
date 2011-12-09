@@ -19,12 +19,18 @@ cp $REPACK/ota/system/etc/terminfo/l/linux $REPACK/ota/system/etc/terminfo/x/xte
 # prebuilt boot, devtree, logo & updater-script
 rm -f $REPACK/ota/boot.img
 cp -f $ANDROID_BUILD_TOP/device/motorola/jordan/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
-if [ -n "$CYANOGEN_RELEASE" ]; then
-  cat $ANDROID_BUILD_TOP/device/motorola/jordan/updater-script-rel >> $REPACK/ota/META-INF/com/google/android/updater-script
-  cp -f $ANDROID_BUILD_TOP/vendor/motorola/jordan/boot-222-179-4.smg $REPACK/ota/boot.img
-  cp -f $ANDROID_BUILD_TOP/vendor/motorola/jordan/devtree-222-179-2.smg $REPACK/ota/devtree.img
-  cp -f $ANDROID_BUILD_TOP/device/motorola/jordan/logo-google.raw $REPACK/ota/logo.img
-fi
+
+cat $DEVICE_TOP/updater-script-test >> $REPACK/ota/META-INF/com/google/android/updater-script
+cp -f $VENDOR_TOP/boot-234-134.smg $REPACK/ota/boot.img
+cp -f $VENDOR_TOP/devtree-234-134.smg $REPACK/ota/devtree.img
+
+#if [ -n "$CYANOGEN_RELEASE" ]; then
+#  cat $ANDROID_BUILD_TOP/device/motorola/jordan/updater-script-rel >> $REPACK/ota/META-INF/com/google/android/updater-script
+#  cp -f $ANDROID_BUILD_TOP/vendor/motorola/jordan/boot-222-179-4.smg $REPACK/ota/boot.img
+#  cp -f $ANDROID_BUILD_TOP/vendor/motorola/jordan/devtree-222-179-2.smg $REPACK/ota/devtree.img
+#  cp -f $ANDROID_BUILD_TOP/device/motorola/jordan/logo-google.raw $REPACK/ota/logo.img
+#fi
+
 cp -f $ANDROID_BUILD_TOP/out/target/product/jordan/root/init $REPACK/ota/system/bootmenu/2nd-init/init
 cp -f $ANDROID_BUILD_TOP/out/target/product/jordan/root/init.rc $REPACK/ota/system/bootmenu/2nd-init/init.rc
 cp -f $ANDROID_BUILD_TOP/out/target/product/jordan/root/sbin/adbd $REPACK/ota/system/bin/adbd
